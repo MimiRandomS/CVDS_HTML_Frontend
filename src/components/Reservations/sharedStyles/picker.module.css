@@ -1,0 +1,12 @@
+.picker {
+  border: none;
+  width: 5rem;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+:global(.react-datepicker__input-container) {
+  display: flex;
+  background: none;
+}

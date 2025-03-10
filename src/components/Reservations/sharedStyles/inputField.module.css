@@ -1,0 +1,9 @@
+.container {
+  background-color: rgba(232, 232, 232, 0.41);
+  border-radius: 10px;
+  padding: 0.7rem 1.5rem;
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  width: 100%;
+}

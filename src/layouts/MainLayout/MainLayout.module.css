@@ -1,0 +1,15 @@
+.layout {
+  display: flex;
+}
+
+.sidebar {
+  width: 30%;
+  height: 100%;
+  max-width: 17rem;
+  position: fixed;
+}
+
+.main {
+  flex: 1;
+  margin-left: min(30%, 17rem);
+}

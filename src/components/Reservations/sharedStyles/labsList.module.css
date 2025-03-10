@@ -1,0 +1,51 @@
+.container {
+  position: relative;
+}
+
+.list {
+  position: absolute;
+  list-style: none;
+  background-color: #fff;
+  box-shadow: 4px 3px 15px 4px #828282;
+  border-radius: 5px;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  pointer-events: none;
+}
+
+.listVisible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.item {
+  border-bottom: solid 1px rgb(213, 213, 213);
+}
+
+.itemBtn {
+  width: 100%;
+  position: relative;
+  padding: 0.8rem 3rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.itemBtn::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #000;
+  transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+.itemBtn:hover::after {
+  width: 100%;
+  left: 0;
+}
