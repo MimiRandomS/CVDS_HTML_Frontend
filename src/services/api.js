@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8080/";
+const API_BASE_URL = "https://unireserva-haa2a4e3aueeeqes.brazilsouth-01.azurewebsites.net";
 
 const api = {
   get: async (endpoint) => {

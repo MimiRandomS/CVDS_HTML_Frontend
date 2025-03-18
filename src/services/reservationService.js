@@ -1,22 +1,23 @@
-const getUserReservations = async (userId) => {
-  try {
-    const data = await api.get(`reservations/user/${userId}`);
-    return data;
-  } catch (error) {
-    console.error("Error al obtener reservas:", error.message);
-    throw error;
-  }
-};
+import api from "./api.js";
 
-const cancelReservation = async (reservationId) => {
+async function getReservations(userId) {
   try {
-    const message = await api.put(`reservations/cancel/${reservationId}`);
-    return message;
+    const response = await api.get(`/reservations/user/${userId}`);
+    return response.data; 
   } catch (error) {
-    console.error("Error al cancelar reserva:", error.message);
-    throw error;
+    console.error("Error al obtener reservas:", error);
+    return [];
   }
-};
+}
 
-window.getUserReservations = getUserReservations;
-window.cancelReservation = cancelReservation;
+async function cancelReservation(id) {
+  try {
+    const response = await api.put(`/reservations/cancel/${id}`);
+    return response;
+  } catch (error) {
+    console.error(`Error al cancelar la reserva con id ${id}:`, error);
+    return { success: false, message: "Error al cancelar la reserva" };
+  }
+}
+
+export { getReservations, cancelReservation };

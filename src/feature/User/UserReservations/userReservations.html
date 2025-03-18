@@ -4,17 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="../../../global.css" />
-
     <link rel="stylesheet" href="userReservations.css" />
     <link rel="stylesheet" href="../../../styles/layout-main.css" />
     <link rel="stylesheet" href="../../../styles/lateralBar.css" />
-    <title>Document</title>
+    <link rel="stylesheet" href="../../../styles/card.css" />
+    <link rel="stylesheet" href="../../../styles/Modal.css" />
+    <link rel="stylesheet" href="../../../styles/IconLink.css" />
+    <link rel="stylesheet" href="../../../styles/Button.css" />
+    <link rel="stylesheet" href="userReservations.css" />
+    <title>Mis Reservas</title>
   </head>
   <body>
     <div class="layout">
@@ -22,24 +26,39 @@
         <div class="lateralBar">
           <div class="lateralBar__listContainer">
             <ul class="lateralBar__list">
-              <li class="lateralBar__item">Reservas</li>
-              <li class="lateralBar__item">Mis reservas</li>
+              <li class="lateralBar__item"><a class="lateralBar_link" href="../../Reservation/reservation.html">Reservas</a></li>
+              <li class="lateralBar__item"><a class="lateralBar_link" href="../../User/UserReservations/userReservations.html">Mis reservas</a></li>
             </ul>
           </div>
           <div class="lateralBar__account">
-            <i class="fa-solid fa-user"></i> 
-            <p class="lateralBar__p">Mi cuenta</p>
+            <i class="fa-solid fa-user"></i>
+            <p class="lateralBar__p"><a class="lateralBar_link" href="../account/account.html">Mi cuenta</a></p>
           </div>
         </div>
       </div>
 
       <div class="main">
-        
+        <div id="userReservationsContainer" class="ReservationsContainer">
+          <div id="listReservations" class="listReservations"></div>
+          <div id="detailModal" class="modalOverlay" style="display: none">
+            <div id="detailContent"></div>
+          </div>
+
+          <div id="cancelModal" class="modalOverlay" style="display: none">
+            <div class="modalContent">
+              <h2>¿Estás seguro de cancelar esta reserva?</h2>
+              <div class="containerModalCancel">
+                <button id="cancelBtn" class="btn btn2Modal">Cancelar</button>
+                <button id="confirmCancelBtn" class="btn btn1Modal">
+                  Confirmar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <script src="/services/api.js"></script>
-    <script src="/services/reservationService.js"></script>
-    <script src="userReservations.js"></script>
+    <script type="module" src="./userReservations.js"></script>
   </body>
 </html>

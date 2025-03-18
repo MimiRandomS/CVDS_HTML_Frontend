@@ -37,3 +37,8 @@
   background-color: rgb(60, 60, 60);
   cursor: pointer;
 }
+
+.lateralBar_link{
+  color: #fff;
+  text-decoration: none;
+}
