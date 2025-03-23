@@ -1,0 +1,15 @@
+.icoButton{
+    background: none;
+    border: none;
+}
+
+.ico { 
+    height: auto;
+    max-width: 2rem;
+    transition: transform 0.3s ease-in-out;
+}
+
+.ico:hover { 
+    transform: scale(1.1);
+    cursor: pointer;
+}
