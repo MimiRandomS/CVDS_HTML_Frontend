@@ -2,6 +2,7 @@ import {
   getReservations,
   cancelReservation,
 } from "../../../services/reservationService.js";
+import { login } from "../../../services/authService.js";
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -12,12 +13,30 @@ document.addEventListener("DOMContentLoaded", async () => {
   const cancelBtn = document.getElementById("cancelBtn");
   const confirmCancelBtn = document.getElementById("confirmCancelBtn");
 
-  let userId = localStorage.getItem("userId");
 
-  if (!userId) {
-    alert("Error: No se encontró el ID del usuario en localStorage. Se usará un ID temporal.");
-    userId = 1032373105; // ✅ Ahora sí cambia el valor
+  let user = JSON.parse(localStorage.getItem("user"));
+
+  // cambiar cuando haya auth
+
+  if (!user) {
+    alert("Iniciando sesión automáticamente con usuario de prueba...");
+    
+    try {
+      user = await login("daniel@gmail.com", "Contra#123");
+      if (!user) {
+        alert("Error: No se pudo iniciar sesión. Verifica las credenciales.");
+        return;
+      }
+    } catch (error) {
+      console.error("Error al iniciar sesión automáticamente:", error);
+      alert("Error al iniciar sesión. Inténtalo más tarde.");
+      return;
+    }
   }
+
+  const userId = user.id;
+  console.log("Usuario autenticado con ID:", userId);
+
   
 
   let reservationsList = await getReservations(userId); // Llamada a API con el ID del usuario

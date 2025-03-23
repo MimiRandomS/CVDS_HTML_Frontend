@@ -1,25 +1,62 @@
-const API_BASE_URL = "https://unireserva-haa2a4e3aueeeqes.brazilsouth-01.azurewebsites.net";
+const API_BASE_URL = "https://localhost:8443";
 
 const api = {
   get: async (endpoint) => {
-    const response = await fetch(API_BASE_URL + endpoint, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const token = localStorage.getItem("token"); 
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`; 
+    }
+
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, { headers });
+
     if (!response.ok) throw new Error("Error en la solicitud GET");
     return response.json();
   },
 
   put: async (endpoint) => {
-    const response = await fetch(API_BASE_URL + endpoint, {
+    const token = localStorage.getItem("token");
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
     });
+
     if (!response.ok) throw new Error("Error en la solicitud PUT");
-    return response.text(); // o response.json() según respuesta de tu API
+    return response.text();
+  },
+
+  post: async (endpoint, data) => {
+    const token = localStorage.getItem("token");
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error en la solicitud POST");
+    }
+
+    return response.json();
   },
 };
 
