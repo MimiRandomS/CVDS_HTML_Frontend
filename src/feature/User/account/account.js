@@ -1,4 +1,5 @@
 import { login } from "../../../services/authService.js";
+import { updateUser } from "../../../services/userService.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     let user = JSON.parse(localStorage.getItem("user"));
@@ -6,8 +7,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!user) {
         alert("Iniciando sesión automáticamente con usuario de prueba...");
         try {
-            user = await login("daniel@gmail.com", "Contra#123");
-
+            user = await login("polin@gmail.com", "Contra#123");
+            
             if (!user) {
                 alert("Error: No se pudo iniciar sesión. Verifica las credenciales.");
                 return;
@@ -15,27 +16,56 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             localStorage.setItem("user", JSON.stringify(user));
         } catch (error) {
-            console.error("Error al iniciar sesión automáticamente:", error);
             alert("Error al iniciar sesión. Inténtalo más tarde.");
             return;
         }
     }
-
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+    }
     document.querySelector(".info").innerHTML = generateAccountHTML(user.name, user.id, user.email);
 
     document.querySelector(".btn-name").addEventListener("click", () => openModal("name"));
     document.querySelector(".btn-password").addEventListener("click", () => openModal("password"));
     document.querySelector(".btn-delete").addEventListener("click", () => openModal("delete"));
     document.querySelector(".btn1Modal").addEventListener("click", logout);
+    document.getElementById("modalCancel").addEventListener("click", closeModal);
 
-    function logout() {
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-        alert("Sesión cerrada.");
-        window.location.href = "../../Login/login.html";
-    }
-    
 });
+
+
+async function saveName() {
+    const newName = document.getElementById("newName").value.trim();
+    
+    if (!newName) {
+        alert("Por favor, ingresa un nombre válido.");
+        return;
+    }
+
+    let user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user || !user.id) {
+        alert("Error: No se encontró un usuario en la sesión.");
+        return;
+    }
+
+    try {
+        const response = await updateUser(user.id, { name: newName });
+
+        if (response?.status === "success") {  
+            user.name = response.data.name; 
+            localStorage.setItem("user", JSON.stringify(user));
+            document.querySelector(".info__name").textContent = user.name;
+            alert("Nombre actualizado exitosamente.");
+            closeModal();
+        } else {
+            alert("Error al actualizar el nombre.");
+        }
+    } catch (error) {
+        alert("Hubo un problema al conectar con el servidor.");
+    }
+}
+
 
 function generateAccountHTML(name, idNumber, email) {
     return `
@@ -77,18 +107,18 @@ function openModal(action) {
     if (action === "name") {
         modalTitle.textContent = "Cambiar Nombre";
         modalBody.innerHTML = `<input type="text" id="newName" placeholder="Nuevo nombre" class="inputModal">`;
-        confirmBtn.onclick = () => saveName();
+        confirmBtn.onclick = saveName;
     } else if (action === "password") {
         modalTitle.textContent = "Cambiar Contraseña";
         modalBody.innerHTML = `
             <input type="password" id="oldPassword" placeholder="Contraseña actual" class="inputModal">
             <input type="password" id="newPassword" placeholder="Nueva contraseña" class="inputModal">
         `;
-        confirmBtn.onclick = () => savePassword();
+        confirmBtn.onclick = savePassword;
     } else if (action === "delete") {
         modalTitle.textContent = "Borrar Cuenta";
         modalBody.innerHTML = `<p>¿Estás seguro de que deseas eliminar tu cuenta? Esta acción es irreversible.</p>`;
-        confirmBtn.onclick = () => deleteAccount();
+        confirmBtn.onclick = deleteAccount;
     }
 
     modal.addEventListener("click", (event) => {
@@ -96,38 +126,44 @@ function openModal(action) {
     });
 }
 
-function closeModal() {
-    document.getElementById("modal").style.display = "none";
-}
 
-function saveName() {
-    const newName = document.getElementById("newName").value.trim();
-    if (newName !== "") {
-        document.querySelector(".info__name").textContent = newName;
-        closeModal();
-    } else {
-        alert("Por favor, ingresa un nombre válido.");
-    }
-}
-
-function savePassword() {
+async function savePassword() {
     const oldPassword = document.getElementById("oldPassword").value.trim();
     const newPassword = document.getElementById("newPassword").value.trim();
 
-    if (oldPassword !== "" && newPassword !== "") {
-        alert("Contraseña cambiada exitosamente.");
-        closeModal();
-    } else {
+    if (!oldPassword || !newPassword) {
         alert("Por favor, completa todos los campos.");
+        return;
+    }
+
+    let user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user || !user.id) {
+        alert("Error: No se encontró un usuario en la sesión.");
+        return;
+    }
+
+    try {
+        const response = await updateUser(user.id, { password: newPassword });
+
+        if (response?.success) {
+            alert("Contraseña cambiada exitosamente.");
+            closeModal();
+        } else {
+            alert("Error al cambiar la contraseña.");
+        }
+    } catch (error) {
+        alert("Hubo un problema al conectar con el servidor.");
     }
 }
 
-function deleteAccount() {
-    alert("Cuenta eliminada.");
-    closeModal();
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
 }
-
-
-
-
-
+function logout() {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    alert("Sesión cerrada.");
+    window.location.href = "../../../index.html";
+}
