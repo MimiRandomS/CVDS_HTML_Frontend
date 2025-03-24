@@ -1,36 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="../../../global.css" />
-    <link rel="stylesheet" href="../../../styles/layout-main.css" />
-    <link rel="stylesheet" href="../../../styles/lateralBar.css" />
-
-    <title>template</title>
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../global.css">
+    <link rel="stylesheet" href="../../../styles/layout-main.css">
+    <link rel="stylesheet" href="../../../styles/lateralBar.css">
+    <link rel="stylesheet" href="account.css"> 
+    <title>Perfil de Usuario</title>
+</head>
+<body>
     <div class="layout">
         <div class="sidebar">
-          <div class="lateralBar">
-            <div class="lateralBar__listContainer">
-              <ul class="lateralBar__list">
-                <li class="lateralBar__item"><a class="lateralBar_link" href="../../Reservation/reservation.html">Reservas</a></li>
-                <li class="lateralBar__item"><a class="lateralBar_link" href="../../User/UserReservations/userReservations.html">Mis reservas</a></li>
-              </ul>
+            <div class="lateralBar">
+                <div class="lateralBar__listContainer">
+                    <ul class="lateralBar__list">
+                        <li class="lateralBar__item">
+                            <a class="lateralBar_link" href="../../Reservation/reservation.html">Reservas</a>
+                        </li>
+                        <li class="lateralBar__item">
+                            <a class="lateralBar_link" href="../../User/UserReservations/userReservations.html">Mis reservas</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lateralBar__account">
+                    <i class="fa-solid fa-user"></i>
+                    <p class="lateralBar__p">
+                        <a class="lateralBar_link" href="../account/account.html">Mi cuenta</a>
+                    </p>
+                </div>
             </div>
-            <div class="lateralBar__account">
-              <i class="fa-solid fa-user"></i>
-              <p class="lateralBar__p"><a class="lateralBar_link" href="../account/account.html">Mi cuenta</a></p>
-            </div>
-          </div>
         </div>
-        
-  </body>
+
+        <main class="profile-container">
+            <div class="profile">
+                <div class="profile-header">
+                    <div class="header__photo">
+                        <img src="/src/assets/public/photo.png">
+                    </div>
+                </div>
+
+                <div class="info">
+                    
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="modal" class="mainModal" style="display: none;">
+      <div class="containerModal">
+          <div class="rowModal">
+              <span id="modalTitle">Título</span>
+          </div>
+          <div id="modalBody" class="rowModal">
+          </div>
+          <div class="containerModalCancel">
+              <button id="modalConfirm" class="btn2Modal">Confirmar</button>
+              <button id="modalCancel" class="btn1Modal">Cancelar</button>
+          </div>
+      </div>
+  </div>
+
+    <script type="module" src="account.js"></script>
+</body>
 </html>

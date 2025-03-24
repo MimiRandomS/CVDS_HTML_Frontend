@@ -6,7 +6,7 @@ const api = {
     const headers = {
       "Content-Type": "application/json",
     };
-    
+
     if (token) {
       headers["Authorization"] = `Bearer ${token}`; 
     }
@@ -17,7 +17,7 @@ const api = {
     return response.json();
   },
 
-  put: async (endpoint) => {
+  put: async (endpoint, data) => {  
     const token = localStorage.getItem("token");
     const headers = {
       "Content-Type": "application/json",
@@ -30,6 +30,7 @@ const api = {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: "PUT",
       headers,
+      body: JSON.stringify(data), 
     });
 
     if (!response.ok) throw new Error("Error en la solicitud PUT");
@@ -58,6 +59,52 @@ const api = {
 
     return response.json();
   },
+
+  patch: async (endpoint, data) => {
+    const token = localStorage.getItem("token");
+    const headers = {
+      "Content-Type": "application/json",
+    };
+  
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+  
+    const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
+      method: "PATCH",
+      headers,
+      body: JSON.stringify(data),
+    });
+  
+    if (!response.ok) {
+      throw new Error("Error en la solicitud PATCH");
+    }
+  
+    return response.json();
+  }
+
+  ,delete: async (endpoint) => {
+    const token = localStorage.getItem("token");
+    const headers = { "Content-Type": "application/json" };
+
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      method: "DELETE",
+      headers,
+    });
+
+    if (!response.ok) {
+      throw new Error("Error en la solicitud DELETE");
+    }
+
+    return response.json();
+  }
+
+
 };
+
 
 export default api;
