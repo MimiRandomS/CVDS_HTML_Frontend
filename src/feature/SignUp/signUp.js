@@ -18,13 +18,7 @@ async function handleSubmit(event) {
 
     try {
         const newUser = await signup(userData);
-
-        if (newUser) {
-            console.log("Registro exitoso:", newUser);
-            window.location.href = '../src/feature/Reservation/reservation.html';
-        } else {
-            alert("Error en el registro. Verifica los datos.");
-        }
+        window.location.href = '../src/feature/Reservation/reservation.html';
     } catch (error) {
         console.error("Error durante el registro:", error);
     }
