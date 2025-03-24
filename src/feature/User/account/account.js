@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!user) {
         alert("Iniciando sesión automáticamente con usuario de prueba...");
         try {
-            user = await login("polin@gmail.com", "Contra#123");
+            user = await login("daniel@gmail.com", "Contra#123");
             
             if (!user) {
                 alert("Error: No se pudo iniciar sesión. Verifica las credenciales.");
