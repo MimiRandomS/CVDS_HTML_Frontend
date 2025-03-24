@@ -1,18 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="../../../global.css" />
-    <title>template</title>
-  </head>
-  <body>
-  
-  </body>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="../../feature/SignUp/signUp.css">
+    <script src="../../feature/SignUp/signUp.js" defer type="module"></script>
+    <link rel="preload" as="image" href="../../assets/auth/bg.png">
+    <link rel="preload" as="image" href="../../assets/auth/logo.png">
+    <title>Registro</title>
+</head>
+
+<body>
+    <img id="background" src="../../assets/auth/bg.png">
+    <div id="principal">
+        <div id="logoBack">
+            <img id="logo" src="../../assets/auth/logo.png">
+        </div>
+        <div id="form">
+            <h2>Registrarse</h2>
+            <form id="signupForm">
+                <input type="number" id="inputId" placeholder="Número de identidad" required min="0">
+                <input type="text" id="inputName" placeholder="Nombre" required>
+                <input type="email" id="inputEmail" required placeholder="Correo">
+                <input type="password" id="inputPassword" required placeholder="Contraseña">
+                <button id="buttonStart" type="submit">Registrarse</button>
+            </form>
+            <div id="loginContainer">
+                <p>¿Ya tienes una cuenta? 
+                    <a id="login">Inicia sesión</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
 </html>

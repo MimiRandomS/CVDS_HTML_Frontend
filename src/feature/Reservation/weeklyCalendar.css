@@ -1,0 +1,69 @@
+.weekly-calendar {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f4f9;
+    padding: 10px;
+  }
+  
+  .calendar-header button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .calendar-header button:hover {
+    background-color: #0056b3;
+  }
+  
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(10, 60px);
+    border-top: 1px solid #ddd;
+  }
+  
+  .calendar-hour {
+    grid-column: 1;
+    grid-row: span 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fafafa;
+    border-right: 1px solid #ddd;
+    font-weight: bold;
+  }
+  
+  .calendar-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .calendar-day:last-child {
+    border-right: none;
+  }
+  
+  @media (max-width: 768px) {
+    .calendar-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  
+    .calendar-day {
+      font-size: 12px;
+    }
+  }
+  

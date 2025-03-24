@@ -1,5 +1,25 @@
 import api from "./api.js";
 
+
+async function createReservation({ labId, date, time, duration, priority, purpose }) {
+  try {
+    const reservation = {
+      labId: labId,
+      date: date,
+      time: time,
+      duration: duration,
+      priority: priority,
+      purpose: purpose
+    };
+
+    const response = await api.post("/reservations", reservation);
+    return response.data;
+  } catch (error) {
+    console.error("Error al crear la reserva:", error);
+    return { success: false, message: "Error al crear la reserva" };
+  }
+}
+
 async function getReservations(userId) {
   try {
     const response = await api.get(`/reservations/user/${userId}`);
@@ -20,4 +40,4 @@ async function cancelReservation(id) {
   }
 }
 
-export { getReservations, cancelReservation };
+export { getReservations, cancelReservation, createReservation };

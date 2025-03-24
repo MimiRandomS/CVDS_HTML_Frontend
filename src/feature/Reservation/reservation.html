@@ -1,36 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="../../global.css" />
-    <link rel="stylesheet" href="../../styles/layout-main.css" />
-    <link rel="stylesheet" href="../../styles/lateralBar.css" />
 
-    <title>template</title>
-  </head>
-  <body>
-    <div class="layout">
-        <div class="sidebar">
-          <div class="lateralBar">
-            <div class="lateralBar__listContainer">
-              <ul class="lateralBar__list">
-                <li class="lateralBar__item"><a class="lateralBar_link" href="../Reservation/reservation.html">Reservas</a></li>
-                <li class="lateralBar__item"><a class="lateralBar_link" href="../User/UserReservations/userReservations.html">Mis reservas</a></li>
-              </ul>
-            </div>
-            <div class="lateralBar__account">
-              <i class="fa-solid fa-user"></i>
-              <p class="lateralBar__p"><a class="lateralBar_link" href="../User/account/account.html">Mi cuenta</a></p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../../global.css" />
+  <link rel="stylesheet" href="../../styles/layout-main.css" />
+  <link rel="stylesheet" href="../../styles/lateralBar.css" />
+  <link rel="stylesheet" href="../../feature/Reservation/reservation.css" />
+  <link rel="stylesheet" href="../../feature/Reservation/weeklyCalendar.css" />
+
+  <title>Reservas</title>
+</head>
+
+<body>
+  <div class="layout">
+    <div class="sidebar">
+      <div class="lateralBar">
+        <div class="lateralBar__listContainer">
+          <ul class="lateralBar__list">
+            <li class="lateralBar__item">
+              <a class="lateralBar_link" href="../Reservation/reservation.html">Reservas</a>
+            </li>
+            <li class="lateralBar__item">
+              <a class="lateralBar_link" href="../User/UserReservations/userReservations.html">Mis reservas</a>
+            </li>
+          </ul>
+        </div>
+        <div class="lateralBar__account">
+          <i class="fa-solid fa-user"></i>
+          <p class="lateralBar__p">
+            <a class="lateralBar_link" href="../User/account/account.html">Mi cuenta</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="container">
+        <div class="info">
+          <div class="labs__container">
+            <h2 id="labName" class="labs__labName">Selecciona un laboratorio</h2>
+            <div class="labs__icons">
+              <select id="labSelect" class="labSelection">
+                <option value="">Seleccionar laboratorio</option>
+              </select>
             </div>
           </div>
+          <div class="data">
+            <div class="data__selector">
+              <input type="date" id="dateSelector" class="input" />
+              <input type="time" id="timeSelector" class="input" />
+              <select id="durationSelector" class="input">
+                <option value="30">30 min</option>
+                <option value="60">60 min</option>
+                <option value="90">90 min</option>
+                <option value="120">120 min</option>
+                <option value="150">150 min</option>
+                <option value="180">180 min</option>
+              </select>
+            </div>
+            <div class="data__selector">
+              <select id="prioritySelector" class="input">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              <input type="text" id="purpose" placeholder="Propósito de la reserva" class="input" />
+            </div>
+            <button id="reserveButton" class="data__btn">Reservar</button>
+          </div>
         </div>
-        
-  </body>
+        <div class="weekly-calendar">
+          <div class="calendar-header">
+            <button onclick="changeWeek(-1)">&lt;</button>
+            <h2 id="weekRange">Semana actual</h2>
+            <button onclick="changeWeek(1)">&gt;</button>
+          </div>
+
+          <div class="calendar-grid" id="calendarGrid">
+            <div class="calendar-hour">Hora</div>
+            <div class="calendar-day">Lunes</div>
+            <div class="calendar-day">Martes</div>
+            <div class="calendar-day">Miércoles</div>
+            <div class="calendar-day">Jueves</div>
+            <div class="calendar-day">Viernes</div>
+            <div class="calendar-day">Sábado</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../feature/Reservation/reservations.js" type="module"></script>
+</body>
+
 </html>
